@@ -1,5 +1,5 @@
-import caseStudiesMapper from './CaseStudies/mapper';
+// import caseStudiesMapper from './CaseStudies/mapper';
 
-export const mappers = {
-	case_studies: caseStudiesMapper
-};
+// export const mappers = {
+// 	case_studies: caseStudiesMapper
+// };
