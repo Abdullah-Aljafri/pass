@@ -1,0 +1,25 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Occaecat exercitation officia eiusmod ut exercitation do occaecat qui commodo duis aute. Exercitation ex excepteur quis reprehenderit dolor dolore id commodo nulla quis id ex do. Quis aliqua culpa sint proident eu fugiat dolore anim culpa."
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]
