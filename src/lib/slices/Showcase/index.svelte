@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 	import Bounded from '$lib/components/Bounded.svelte';
     import ButtonLink from '$lib/components/ButtonLink.svelte';
     import type { Content } from '@prismicio/client';
@@ -10,25 +13,71 @@
 	
 	export let slice: Content.ShowcaseSlice;
 	
-const icons = {
-    gear: IconGear,
-	cycle: IconCycle
-};
+    onMount(() => {
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce').matches;
+
+		if (prefersReducedMotion) return;
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.fromTo(
+			'.showcase__heading',
+			{
+				y: 100
+			},
+			{
+				y: 0,
+				ease: 'power2.inOut',
+				duration: 1,
+				scrollTrigger: {
+					trigger: '.showcase__heading',
+					start: 'top bottom-=40%',
+					toggleActions: 'play pause resume reverse'
+				}
+			}
+		);
+
+		gsap.fromTo(
+			'.showcase__glow',
+			{
+				scale: 0.7,
+				opacity: 0.1
+			},
+			{
+				scale: 1,
+				opacity: 0.35,
+				ease: 'power2.inOut',
+				duration: 1,
+				scrollTrigger: {
+					trigger: '.showcase__heading',
+					start: 'top bottom-=40%',
+					toggleActions: 'play pause resume reverse',
+
+					markers: true
+				}
+			}
+		);
+	});
+
+	const icons = {
+		gear: IconGear,
+		cycle: IconCycle
+	};
 </script>
 
 <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation} class="relative">
 	<div
-	class="showcase__glow absolute -z-10 aspect-video w-full max-w-2xl rounded-full bg-violet-500/40 mix-blend-screen blur-[120px] filter"
+		class="showcase__glow absolute -z-10 aspect-video w-full max-w-2xl rounded-full bg-violet-500 mix-blend-screen blur-[120px] filter"
 	/>
 	{#if slice.primary.heading}
-		<h2 class="text-balance text-center text-5xl font-medium md:text-7xl" >
-			<PrismicRichText field={slice.primary.heading}  components={{ heading2: SpanHeading }}/>
+		<h2 class="showcase__heading text-balance text-center text-5xl font-medium md:text-7xl">
+			<PrismicRichText field={slice.primary.heading} components={{ heading2: SpanHeading }} />
 		</h2>
 	{/if}
-	<div class="relative mt-16 grid items-center gap-8 rounded-xl border border-violet-50/20 bg-gradient-to-b
-		 from-gray-50/15 to-gray-50/5 px-8 py-8 backdrop-blur-sm lg:grid-cols-3 lg:gap-0 lg:py-12">
-
-	<div class="grid-background" />
+	<div
+		class="relative mt-16 grid items-center gap-8 rounded-xl border border-violet-50/20 bg-gradient-to-b from-gray-50/15 to-gray-50/5 px-8 py-8 backdrop-blur-sm lg:grid-cols-3 lg:gap-0 lg:py-12"
+	>
+		<div class="grid-background" />
 
 		<div>
 			{#if slice.primary.icon}
