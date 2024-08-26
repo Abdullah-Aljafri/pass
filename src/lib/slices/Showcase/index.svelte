@@ -53,7 +53,7 @@
 					start: 'top bottom-=40%',
 					toggleActions: 'play pause resume reverse',
 
-					markers: true
+					// markers: true
 				}
 			}
 		);
